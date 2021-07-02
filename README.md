@@ -6,4 +6,4 @@ This PowerShell script will automatically prune torrents which exceed a certain 
 [uTorrent-Prune-Old-Torrents.ps1](https://github.com/ArchiRocksTech/BTTspeedUtilities/blob/main/uTorrent-Prune-Old-Torrents.ps1)
 
 # Ban non-BTT-Speed clients
-A PowerShell script that helps to ensure you maximize your income potential by only allowing clients which support BTT Speed. It offers to methods, the IPFilter.dat of the torrent client and the Windows Firewall.
+A PowerShell script that helps to ensure you maximize your BTT income potential by only allowing clients which support BTT Speed. It offers two methods, the IPFilter.dat of the torrent client and the Windows Firewall. You can enable one or both. [ComingSoonTM](https://github.com/ArchiRocksTech/BTTspeedUtilities)
