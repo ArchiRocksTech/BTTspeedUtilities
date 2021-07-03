@@ -15,6 +15,26 @@ A Telegram group with a bot that auto messages when the BTT Exchange wallet bala
 
 **[Join us](https://t.me/bttexchangewalletbalance)**
 
+# Donations
+*Never expected, always welcome.*
+* BTC `bc1q6g7rg5xryumgygmysq5zwe0svc0jmzpazz75p8`
+* ETH / ERC20 `0x2406ba931307e56f4DB506099Eb09224223CF4E8`
+* TRX / BTT / USDT-TRC10 `TNRtWbQQ9aCTtQYLEePFGSBwEBvhHsa1Ye`
+* DOT `14T62EomidLtwXDZsKSJ4usfm8q4UJoq1y926XG3zzbJGCMB`
+* XTZ `tz1WwTjCvjxc1yeze2xMBWdyApwfHacBhh5v`
+* ADA `addr1q8c9gur0mam0h69h7pttgd2vfdugl6vack42l38r7hfj2r0s23cxlhmkl05t0uzkks65cjmc3l5em3d24lzw8awny5xst84y5r`
+* BNB `bnb1tw8pd7tx8m8tfcjcqkl5fp98xzvxh9u2j29kh0`
+* XLM `GBOX5QQ72BPSA5ZYPN5Q5WLBRY3TTQXFU4SBLGKMAR7BS7UAR45GLXVQ`
+* ONT `AG78qWzQcdwdGH7hPzxTFH7mLf8qtwz6UV`
+* ATOM `cosmos1ppd4hkaznks8qhwj0v4yacmznh995s9wp2cfa2`
+* DAI `0x2406ba931307e56f4DB506099Eb09224223CF4E8`
+* ALGO `GLNUFUVHS4VOCLPG73S63XN3YKIC2K3XVSNA64N75YATXKITWPWBESNTK4`
+* XRP `rDWb7F719h4E78GaiKpQodhk2GPJaic8Pt`
+* DOGE `DRVQaveJRTeuka2sdzxRFGnw6FYzt6waTB`
+* LTC `LSnLZS6L8xSJxCTpiUicVmDmfT8cV3dpsj`
+* SuperDoge `SMMJQJRDymSqcZZkPihpsDrEc3dZaMvmY4`
+
+
 # Troubleshooting
 
 **ERROR**: [ScriptName] cannot be loaded because running scripts is disabled on this system.
