@@ -39,21 +39,25 @@ $Headers = @{
     "charset" = "utf-8"
 }
 Try {
-    $tokenResults = Invoke-WebRequest -Uri $($baseURL + '/token.html') -Headers $Headers -Method Get -WebSession $session
+    $tokenResults = Invoke-WebRequest -Uri $($baseURL + '/token.html') -Headers $Headers -Method Get -WebSession $session -UseBasicParsing
     $regExOptions = [System.Text.RegularExpressions.RegexOptions]::Multiline
     $regExFilter = '^Set-Cookie:\sGUID=([a-zA-Z0-9]+);'
     $regExMatch = [regex]::Match($tokenResults.RawContent,$regExFilter,$regExOptions)
     $cookieValue = $regExMatch.Groups[1].Value
-    $token = $tokenResults.ParsedHtml.body.innerText
+    $regExFilterToken = "<div\sid='token'\sstyle='display:none;'>(.+)<\/div>"
+    $regExMatchToken = [regex]::Match($tokenResults.RawContent,$regExFilterToken,$regExOptions)
+    $token = $regExMatchToken.Groups[1].Value    
     $cookie = New-Object System.Net.Cookie 
     $cookie.Name = "GUID"
     $cookie.Value = $cookieValue
     $cookie.Domain = "127.0.0.1"
     $cookie.Path = '/'
     $session.Cookies.Add($cookie);
-} Catch {
+} Catch {    
     Write-Host "Failed to query token and cookie information from the Client." -ForegroundColor Red
     Write-Host "Please ensure the configuration matches in the Client and this script and that the Client is currently running." -ForegroundColor Yellow
+    Write-Host "Additional error information: " -NoNewline
+    $errormessage = $_.Exception.Message; Write-Host $errormessage -ForegroundColor Red
     Pause
     break
 }
@@ -65,7 +69,7 @@ $stopIt = $false
 
 Do {
     Clear-Host
-    $list = Invoke-RestMethod -Uri $($baseURL + '/?list=1' + "&token=" + $token) -Headers $Headers -Method Get -WebSession $session
+    $list = Invoke-RestMethod -Uri $($baseURL + '/?list=1' + "&token=" + $token) -Headers $Headers -Method Get -WebSession $session -UseBasicParsing
     $info = $list.torrents | ConvertTo-Json | ConvertFrom-Json
     $torrentHashes = @()
 
@@ -85,19 +89,13 @@ Do {
         }
     }
 
-    $hashList = $null; $i = 0; $ii = 0  
-    ForEach ($hash in $torrentHashes) {
-        $hashList += "&hash=$hash"
-        $i ++ | Out-Null; $ii ++ | Out-Null        
-        If ($i -eq 35 -or $ii -eq $torrentHashes.Count) {
-            If ($pruneTorrents -eq $true) {
-                If ($removeData -eq $true) {
-                    Invoke-WebRequest -Uri $($baseURL + "/?action=removedata$hashList" + "&token=" + $token) -Headers $Headers -Method Get -WebSession $session | Out-Null
-                } Else {
-                    Invoke-WebRequest -Uri $($baseURL + "/?action=remove$hashList" + "&token=" + $token) -Headers $Headers -Method Get -WebSession $session | Out-Null
-                }
-            }
-            $hashList = $null; $i = 0
+    $hashList = $null
+    ForEach ($hash in $torrentHashes) { $hashList += "&hash=$hash" }
+    If ($pruneTorrents -eq $true) {
+        If ($removeData -eq $true) {
+            Invoke-WebRequest -Uri $($baseURL + "/?action=removedata$hashList" + "&token=" + $token) -Headers $Headers -Method Get -WebSession $session -UseBasicParsing | Out-Null
+        } Else {
+            Invoke-WebRequest -Uri $($baseURL + "/?action=remove$hashList" + "&token=" + $token) -Headers $Headers -Method Get -WebSession $session -UseBasicParsing | Out-Null
         }
     }
 
