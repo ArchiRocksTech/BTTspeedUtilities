@@ -1,5 +1,6 @@
 # BTTspeedUtilities
-Various utilities to improve BTT income with uTorrent and Bittorrent torrent clients.
+A collection of various utilities to improve BTT income with [µTorrent](https://www.utorrent.com/downloads/complete/track/stable/os/win) and [BitTorrent](https://www.bittorrent.com/downloads/complete/classic/) torrent clients. 
+Earn BTT with [BitTorrent Speed](https://www.bittorrent.com/token/bittorrent-speed/).
 
 # Torrent Pruning
 This PowerShell script will automatically prune torrents which exceed a certain age. Works will with automated methods of adding torrents so that you constantly have fresh content (check out [Jackett](https://github.com/Jackett/Jackett)). Requires you enable the WebGUI in the torrent client. Configure the settings in the script prior to use.
@@ -16,7 +17,7 @@ A Telegram group with a bot that auto messages when the BTT Exchange wallet bala
 **[Join us](https://t.me/bttexchangewalletbalance)**
 
 # Donations
-*Never expected, always welcome.*
+*Never expected, always welcome and appreciated.*
 * BTC `bc1q6g7rg5xryumgygmysq5zwe0svc0jmzpazz75p8`
 * ETH / ERC20 `0x2406ba931307e56f4DB506099Eb09224223CF4E8`
 * TRX / BTT / USDT-TRC10 `TNRtWbQQ9aCTtQYLEePFGSBwEBvhHsa1Ye`
@@ -33,7 +34,6 @@ A Telegram group with a bot that auto messages when the BTT Exchange wallet bala
 * DOGE `DRVQaveJRTeuka2sdzxRFGnw6FYzt6waTB`
 * LTC `LSnLZS6L8xSJxCTpiUicVmDmfT8cV3dpsj`
 * SuperDoge `SMMJQJRDymSqcZZkPihpsDrEc3dZaMvmY4`
-
 
 # Troubleshooting
 
