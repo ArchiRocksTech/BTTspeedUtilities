@@ -25,6 +25,9 @@ $reRunEveryXminutes = 60
 # Remove Torrent and Data, or just Torrent? ($true or $false. Default: $false)
 $removeData = $false
 
+# Exclude labels(s). Torrents with any of these labels will not be pruned. (Default: @('keep','hold') )
+$excludeThese = @('keep','hold')
+
 # CHANGE NOTHING BELOW =================================================================
 # ======================================================================================
 $host.UI.RawUI.WindowTitle = "uTorrent-Prune-Old-Torrents"
@@ -77,15 +80,18 @@ Do {
         $hash = $torrent.value[0]
         $status = $torrent.value[21]
         $name = $torrent.value[2]
+        $label = $torrent.value[11]
         #$addedOn = $torrent.value[23] # You can use the added on value, but its preferrable to use the completed on value
         $completedOn = $torrent.value[24]
         #$AddedOnFromEpoch = ((Get-Date 01.01.1970)+([System.TimeSpan]::fromseconds($addedOn)) + $tzOffset).AddMinutes(-$dlsOffset)
         $CompletedOnFromEpoch =  ((Get-Date 01.01.1970)+([System.TimeSpan]::fromseconds($completedOn)) + $tzOffset).AddMinutes(-$dlsOffset)
         $age = [math]::Round( (New-TimeSpan -Start $CompletedOnFromEpoch -End (Get-Date)).TotalHours,2)
         Write-Host "[Age: $age hours] $name" -ForegroundColor Cyan
-        If ($age -ge $pruneOlderThan -and $status -eq "Seeding 100.0 %") {
+        If ($age -ge $pruneOlderThan -and $status -eq "Seeding 100.0 %" -and ($excludeThese -notcontains $label)) {
             Write-Host "Pruning due to age: $name" -ForegroundColor Yellow
             $torrentHashes += $hash
+        } ElseIf ($excludeThese -contains $label) {
+            Write-Host "^^ Excluded because of label: $label" -ForegroundColor Yellow
         }
     }
 
