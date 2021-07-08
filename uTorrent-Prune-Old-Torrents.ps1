@@ -24,6 +24,9 @@ $reRunEveryXminutes = 60
 
 # Remove Torrent and Data, or just Torrent? ($true or $false. Default: $false)
 $removeData = $false
+# NOTE when setting to $true: 
+# If you want deleted data to skip the recycle bin and be permanaently deleted, you must
+# change the setting in the torrent client. Advanced: gui.delete_to_trash = false
 
 # Exclude labels(s). Torrents with any of these labels will not be pruned. (Default: @('keep','hold') )
 $excludeThese = @('keep','hold')
