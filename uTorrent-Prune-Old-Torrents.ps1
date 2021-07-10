@@ -33,6 +33,7 @@ $excludeThese = @('keep','hold')
 
 # CHANGE NOTHING BELOW =================================================================
 # ======================================================================================
+#Requires -Version 5.1
 $host.UI.RawUI.WindowTitle = "uTorrent-Prune-Old-Torrents"
 $baseURL = "http://127.0.0.1:$port/gui"
 $pair = "$($user):$($pass)"
