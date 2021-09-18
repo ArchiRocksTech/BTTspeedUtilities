@@ -8,8 +8,14 @@ This PowerShell script will automatically prune torrents which exceed a certain 
 [uTorrent-Prune-Old-Torrents.ps1](https://github.com/ArchiRocksTech/BTTspeedUtilities/blob/main/uTorrent-Prune-Old-Torrents.ps1)
 
 # Ban non-BTT-Speed clients
-A PowerShell script that helps to ensure you maximize your BTT income potential by only allowing clients which support BTT Speed. It offers two methods, the IPFilter.dat of the torrent client and the Windows Firewall. You can enable one or both. Requires you enable the WebGUI in the torrent client. Configure the settings in the script prior to use.
-[ComingSoonTM](https://github.com/ArchiRocksTech/BTTspeedUtilities)
+A PowerShell script that helps to ensure you maximize your BTT income potential by only allowing clients which support BTT Speed. 
+- Was not published. Instead, see the PowerShell Torrent Manager below.
+
+# PowerShell Torrent Manager
+A combination of the Torrent Pruning Script, the non-BTT-Speed client Banning Script, and adds in some Client configuration management.
+* Automatically prune torrents which exceed a certain age (and excluded torrents from prunining with TAGs)
+* Configure client settings (max download queue slots, more coming)
+* Ban non-BTT-Speed clients (configurable by client name and version)
 
 # BTT Exchange Wallet Balance Monitor
 A Telegram group with a bot that auto messages when the BTT Exchange wallet balance changes by more than 999 BTT. Allows you to monitor the balance changes and know when there are enough BTT to perform a withdraw.
