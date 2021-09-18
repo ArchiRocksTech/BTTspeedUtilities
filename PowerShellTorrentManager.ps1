@@ -158,11 +158,35 @@ do {
                 $realVersion = Try {[version]$ClientVersion.value}Catch{[version]"0.0"}
                 switch ($clientName) {
                     # Configure the allowed Clients with their allowed versions. All others are banned!
-                    {($_ -like "Ã‚ÂµTorrent*" -and $realVersion -ge [version]$minUTorrent) -and $_ -notlike "*FAKE*"}{$allowed++} # PowerShell doesn't like the Î¼ mu character
-                    {($_ -like "ÃŽÂ¼Torrent Mac*" -and $realVersion -ge [version]$minUTorrentMac)}{$allowed++} # PowerShell doesn't like the Î¼ mu character
-                    {($_ -like "ÃŽÂ¼Torrent*" -and $realVersion -ge [version]$minUTorrent) -and $_ -notlike "*FAKE*"}{$allowed++} # PowerShell doesn't like the Î¼ mu character
-                    {($_ -like "Î¼Torrent Mac*" -and $realVersion -ge [version]$minUTorrentMac)}{$allowed++} # PowerShell doesn't like the Î¼ mu character
-                    {($_ -like "Î¼Torrent*" -and $realVersion -ge [version]$minUTorrent) -and $_ -notlike "*FAKE*"}{$allowed++} # PowerShell doesn't like the Î¼ mu character
+
+                    # μTorrent uses a unicode symbol that isn't properly deciphered on all systems. Using the byte character value to find it instead.
+                    {
+                        If ([byte][char]$clientName.Substring(0,1) -eq 206 -and [byte][char]$clientName.Substring(1,1) -eq 188){
+                            # $MuFound = $true
+                            $remainingName = $clientName.Substring(2,$clientName.Length -3)
+                            If ($remainingName -like "Torrent*" -and $realVersion -ge [version]$minUTorrent -and $_ -notlike "*FAKE*") {
+                                $true
+                            }
+                        }                    
+                    }{$allowed++}
+                    # μTorrent Mac - same note as above
+                    {
+                        If ([byte][char]$clientName.Substring(0,1) -eq 206 -and [byte][char]$clientName.Substring(1,1) -eq 188){
+                            # $MuFound = $true
+                            $remainingName = $clientName.Substring(2,$clientName.Length -3)
+                            If ($remainingName -like "Torrent Mac*" -and $realVersion -ge [version]$minUTorrentMac -and $_ -notlike "*FAKE*") {
+                                $true
+                            }
+                        }                    
+                    }{$allowed++}
+
+                    # These entries shouldn't be needed any more. Leaving as a fallback.
+                    #{($_ -like "Ã‚ÂµTorrent*" -and $realVersion -ge [version]$minUTorrent) -and $_ -notlike "*FAKE*"}{$allowed++} # PowerShell doesn't like the Î¼ mu character
+                    #{($_ -like "ÃŽÂ¼Torrent Mac*" -and $realVersion -ge [version]$minUTorrentMac)}{$allowed++} # PowerShell doesn't like the Î¼ mu character
+                    #{($_ -like "ÃŽÂ¼Torrent*" -and $realVersion -ge [version]$minUTorrent) -and $_ -notlike "*FAKE*"}{$allowed++} # PowerShell doesn't like the Î¼ mu character
+                    #{($_ -like "Î¼Torrent Mac*" -and $realVersion -ge [version]$minUTorrentMac)}{$allowed++} # PowerShell doesn't like the Î¼ mu character
+                    #{($_ -like "Î¼Torrent*" -and $realVersion -ge [version]$minUTorrent) -and $_ -notlike "*FAKE*"}{$allowed++} # PowerShell doesn't like the Î¼ mu character
+                    
                     {($_ -like "BitTorrent*" -and $realVersion -ge [version]$minBittorrent)}{$allowed++}
                     {($_ -like "libtorrent*" -and $realVersion -ge [version]$minLibTorrent)}{$allowed++} # Deluge uses libtorrent 1.1.13.0 on ubuntu, so use greater than to exclude it
                     {($_ -like "Unknown**" -and $realVersion -ge [version]"0.0") -and $_ -notlike "*FAKE*"}{$allowed++} # PowerShell doesn't like the Î¼ mu character
