@@ -13,7 +13,7 @@ A PowerShell script that helps to ensure you maximize your BTT income potential 
 
 # PowerShell Torrent Manager
 A combination of the Torrent Pruning Script, the non-BTT-Speed client Banning Script, and adds in some Client configuration management.
-* Automatically prune torrents which exceed a certain age (and excluded torrents from prunining with TAGs)
+* Automatically prune torrents which exceed a certain age (and excluded torrents from prunining with TAGs or that exceed an active upload speed limit)
 * Configure client settings (max download queue slots, more coming)
 * Ban non-BTT-Speed clients (configurable by client name and version)
 
