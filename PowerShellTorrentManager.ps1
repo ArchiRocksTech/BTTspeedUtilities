@@ -65,7 +65,7 @@ $maxDLslots = 0
 #======== CHANGE NOTHING BELOW ===============================
 #Requires -Version 5.1
 # ======================================================================================
-$host.UI.RawUI.WindowTitle = "PowerShell Torrent Managers"
+$host.UI.RawUI.WindowTitle = "PowerShell Torrent Manager"
 $baseURL = "http://127.0.0.1:$port/gui"
 
 $ipFilterFile = 'ipfilter.dat'
@@ -151,7 +151,7 @@ do {
         ForEach ($peer in $finalHash) {
             If ($peer[1].Trim() -match '^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$') {$IP = $peer[1].Trim()}
             $clientName =  $peer[5]
-            #$clientSpeedUp = $peer[9]
+            #$clientSpeedUp = $peer[8]
             $clientVerRegex = '[1-9]\d*(\.[1-9]\d*)*$' #'(\d+)\.(\d+)\.?(\d*)\.?(\d*)'
             $ClientVersion = [regex]::Match($clientName, $clientVerRegex)            
             If ($ClientVersion.Success -eq $true) {
@@ -239,7 +239,7 @@ do {
             $status = $torrent.value[21]
             $name = $torrent.value[2]
             $label = $torrent.value[11]
-            $upSpeed = $torrent.value[13]            
+            $upSpeed = [math]::Round( $torrent.value[8] / 1KB , 2)
             #$addedOn = $torrent.value[23] # You can use the added on value, but its preferrable to use the completed on value
             $completedOn = $torrent.value[24]
             #$AddedOnFromEpoch = ((Get-Date 01.01.1970)+([System.TimeSpan]::fromseconds($addedOn)) + $tzOffset).AddMinutes(-$dlsOffset)
